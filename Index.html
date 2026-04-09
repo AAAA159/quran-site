@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Arise System | White Room — Evaluation Zone</title>
+    
+    <!-- أيقونة المتصفح (favicon) حرف A أبيض -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%239c27b0' rx='20'/%3E%3Ctext x='50' y='70' font-size='70' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+    
+    <!-- تحسينات لمشاركة الرابط (WhatsApp, Telegram, Facebook...) -->
+    <meta property="og:title" content="Arise System | White Room">
+    <meta property="og:description" content="انضم إلى غرفة التقييم – سجل بياناتك واختر قطاعك">
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Crect width='500' height='500' fill='%239c27b0'/%3E%3Ctext x='250' y='340' font-size='280' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="500">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Arise System | White Room">
+    <meta name="twitter:description" content="بوابة التسجيل في Arise - حدد هويتك وانضم للقطاع المناسب">
+    <meta name="twitter:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Crect width='500' height='500' fill='%239c27b0'/%3E%3Ctext x='250' y='340' font-size='280' font-family='Arial, sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -324,14 +340,12 @@
 
 <script>
     (function() {
-        // تعريف الرتب مع الشرح
         const levelDescriptions = {
             "مبتدئ (Novice)": "🌱 المستوى المبتدئ: أساسيات البرمجة، فهم بسيط للأنظمة، يتطلب إشراف وتدريب في بيئة Arise.",
             "متوسط (Scholar)": "📘 المستوى المتوسط: يمتلك معرفة جيدة، قادر على تنفيذ مهام مستقلة، يشارك في مشاريع الفريق.",
             "محترف (Elite)": "⚡ المستوى المحترف: خبير في مجاله، يقود مشاريع، يساهم في تطوير البنية التحتية للنظام."
         };
         
-        // تعريف القطاعات (تم إزالة The Archive و Quest Board)
         const sectorDescriptions = {
             "Security Center": "🛡️ مركز الأمن: حماية الأنظمة، اختبار الاختراق الأخلاقي، مراقبة الثغرات، تأمين البنية التحتية.",
             "Visual Arcane": "👁️ السحر البصري: تطوير واجهات المستخدم، تجربة المستخدم، تصميم الجرافيك، تفاعلات بصرية إبداعية.",
@@ -340,7 +354,6 @@
             "Strategy Room": "♟️ غرفة الاستراتيجية: تخطيط المشاريع، تحليل المخاطر، صنع القرار، إدارة الفرق والموارد."
         };
         
-        // قائمة القطاعات المتاحة (بدون The Archive و Quest Board)
         const availableSectors = [
             "Security Center", "Visual Arcane", "Logic Lab", 
             "Development Core", "Strategy Room"
@@ -461,7 +474,6 @@
             });
         }
         
-        // بناء خيارات القطاعات (بدون الأقسام المحذوفة)
         function buildSectorOptions() {
             sectorGroup.innerHTML = '';
             availableSectors.forEach(sector => {
@@ -507,3 +519,141 @@
             const sourceField = document.getElementById('input-source');
             nameField.addEventListener('input', (e) => {
                 userData.name = e.target.value;
+                validateCurrentStep();
+            });
+            sourceField.addEventListener('input', (e) => {
+                userData.source = e.target.value;
+                validateCurrentStep();
+            });
+        }
+        
+        function enterReviewMode() {
+            isReviewMode = true;
+            q1.classList.remove('active');
+            q2.classList.remove('active');
+            q3.classList.remove('active');
+            q4.classList.remove('active');
+            reviewPanel.style.display = 'block';
+            nextBtn.style.display = 'none';
+            ariseBtn.style.display = 'block';
+            updateReviewContent();
+            updateProgressAndStep();
+        }
+        
+        function updateReviewContent() {
+            reviewContent.innerHTML = `
+                <div class="review-row"><span>📛 الاسم المستعار:</span><span>${escapeHtml(userData.name) || '—'}</span></div>
+                <div class="review-row"><span>🔗 عميل الإحالة:</span><span>${escapeHtml(userData.source) || '—'}</span></div>
+                <div class="review-row"><span>🏅 الرتبة البرمجية:</span><span>${escapeHtml(userData.level) || '—'}</span></div>
+                <div class="review-row"><span>🎯 القطاع المستهدف:</span><span>${escapeHtml(userData.sector) || '—'}</span></div>
+            `;
+        }
+        
+        function escapeHtml(str) {
+            if (!str) return '—';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        function exitReviewMode() {
+            isReviewMode = false;
+            reviewPanel.style.display = 'none';
+            nextBtn.style.display = 'block';
+            ariseBtn.style.display = 'none';
+            currentStep = 1;
+            showStep(1);
+            document.getElementById('input-name').value = userData.name;
+            document.getElementById('input-source').value = userData.source;
+            document.querySelectorAll('#level-group .option-item').forEach(opt => {
+                if (opt.getAttribute('data-level') === userData.level) opt.classList.add('selected');
+                else opt.classList.remove('selected');
+            });
+            document.querySelectorAll('#sector-group .option-item').forEach(opt => {
+                if (opt.getAttribute('data-sector') === userData.sector) opt.classList.add('selected');
+                else opt.classList.remove('selected');
+            });
+            validateCurrentStep();
+        }
+        
+        function handleNext() {
+            if (isReviewMode) return;
+            if (currentStep === 1) {
+                if (!userData.name.trim()) return;
+                currentStep = 2;
+                showStep(2);
+            } else if (currentStep === 2) {
+                if (!userData.source.trim()) return;
+                currentStep = 3;
+                showStep(3);
+            } else if (currentStep === 3) {
+                if (!userData.level) {
+                    showToast("⚠️ يرجى اختيار الرتبة البرمجية", true);
+                    return;
+                }
+                currentStep = 4;
+                showStep(4);
+            } else if (currentStep === 4) {
+                if (!userData.sector) {
+                    showToast("⚠️ يرجى اختيار القطاع المستهدف", true);
+                    return;
+                }
+                enterReviewMode();
+            }
+        }
+        
+        async function sendToWhatsApp() {
+            if (!userData.name || !userData.source || !userData.level || !userData.sector) {
+                showToast("❌ البيانات غير مكتملة", true);
+                return;
+            }
+            const message = `ـ وثـيـقـة الأهلية ╎ 𝐄𝐋𝐈𝐆𝐈𝐁𝐈𝐋𝐈𝐓𝐘📑\n` +
+                            `• الـاسـم: [ ${userData.name} ]\n` +
+                            `• الـمـستوي: [ ${userData.level} ]\n` +
+                            `• الـقطاع: [ ${userData.sector} ]\n` +
+                            `• الـمصدر: [ ${userData.source} ]\n` +
+                            `━━━━━━━━━━\nArise.`;
+            try {
+                await navigator.clipboard.writeText(message);
+                showToast("✅ تم نسخ الوثيقة تلقائياً! جارٍ التوجيه");
+            } catch (err) {
+                showToast("📋 تم التوجيه (تعذر النسخ)");
+            }
+            const waUrl = `https://chat.whatsapp.com/DC1XDyXPQHZ0CGkxX0X5Vu?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+        }
+        
+        function addEnterBehavior() {
+            const inputs = [document.getElementById('input-name'), document.getElementById('input-source')];
+            inputs.forEach(inp => {
+                inp.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !nextBtn.disabled && !isReviewMode && (currentStep === 1 || currentStep === 2)) {
+                        e.preventDefault();
+                        handleNext();
+                    }
+                });
+            });
+        }
+        
+        function init() {
+            buildLevelOptions();
+            buildSectorOptions();
+            bindTextFields();
+            addEnterBehavior();
+            nextBtn.addEventListener('click', handleNext);
+            ariseBtn.addEventListener('click', sendToWhatsApp);
+            editReviewBtn.addEventListener('click', exitReviewMode);
+            validateCurrentStep();
+            updateProgressAndStep();
+            document.getElementById('input-name').value = userData.name;
+            document.getElementById('input-source').value = userData.source;
+        }
+        
+        init();
+    })();
+</script>
+</body>
+</html>
