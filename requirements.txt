@@ -1,3 +1,0 @@
-aiogram
-firebase-admin
-python-dotenv
