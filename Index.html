@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta Tags للظهور الاحترافي عند المشاركة -->
+    <title>THE WHITE ROOM | Operational Constitution</title>
+    <meta name="description" content="الدستور الاستراتيجي لمنشأة الغرفة البيضاء - توليد العباقرة.">
+    
+    <!-- الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050505;
+            --panel-color: #0d0d0d;
+            --accent-color: #ffffff;
+            --danger-color: #ff3333;
+            --text-gray: #a0a0a0;
+            --border-style: 1px solid #222;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-gray);
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container { width: 100%; max-width: 900px; }
+
+        /* الترويسة */
+        header { text-align: center; margin-bottom: 60px; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; color: var(--accent-color); letter-spacing: 12px; margin-bottom: 10px; }
+        .sub { font-size: 0.9rem; letter-spacing: 6px; text-transform: uppercase; color: var(--accent-color); opacity: 0.6; }
+
+        /* الشبكة */
+        .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+        .rule-card {
+            background: var(--panel-color);
+            border: var(--border-style);
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .rule-card:hover { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(255,255,255,0.05); }
+        
+        .rule-card h3 { 
+            font-family: 'Orbitron', sans-serif; 
+            color: var(--accent-color); 
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .rule-card h3::before { content: ''; margin-left: 10px; width: 20px; height: 1px; background: #444; }
+
+        .rule-card p { line-height: 1.8; font-size: 1rem; color: #ccc; }
+        .rule-card b { color: var(--accent-color); }
+        .warning { color: var(--danger-color); font-weight: 800; }
+
+        /* الفوتر */
+        footer { text-align: center; margin-top: 60px; padding-top: 20px; border-top: var(--border-style); font-size: 0.7rem; letter-spacing: 4px; color: #444; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <header>
+            <h1>WHITE ROOM</h1>
+            <div class="sub">Operational System • 2026</div>
+        </header>
+
+        <section class="rules-grid">
+            <div class="rule-card">
+                <h3>بروتوكول التدريب</h3>
+                <p>للمحترفين فقط: من وصل للـ Top 3 في النخبة، يحق له تبني تلميذ. <b>الشرط:</b> رفع روابط مباريات التلميذ على Chess.com للقيادة. بلا توثيق = لا اعتماد.</p>
+            </div>
+            <div class="rule-card">
+                <h3>معايير الترقية</h3>
+                <p>للانتقال من "المبتدئين" إلى "النخبة": احتلال المراكز الثلاثة الأولى في قائمة شرف المبتدئين لمدة <b>4 أسابيع متتالية</b>. أي تعثر يعني العودة للصفر.</p>
+            </div>
+            <div class="rule-card">
+                <h3>شرط النشاط</h3>
+                <p>يجب على كل عضو خوض <b>5 مباريات رسمية</b> على الأقل كل أسبوع. أي خمول يقل عن هذا الرقم يعني <span class="warning">الطرد الفوري</span> من الغرفة.</p>
+            </div>
+            <div class="rule-card">
+                <h3>النزاهة التامة</h3>
+                <p>استخدام أي محركات شطرنج (Engine) أثناء اللعب ممنوع تماماً. سنكشف الغشاشين ونقوم <span class="warning">بطردهم نهائياً</span> من سجلات المنشأة بلا رجعة.</p>
+            </div>
+            <div class="rule-card">
+                <h3>قواعد السلوك</h3>
+                <p>النقاشات تقنية بحتة حول الشطرنج. يُمنع منعاً باتاً التلاسن، السخرية، أو العواطف الزائدة. العقل والتحليل هما المعيار الوحيد للبقاء.</p>
+            </div>
+            <div class="rule-card">
+                <h3>الميدان الرسمي</h3>
+                <p>جميع الاختبارات والمباريات تُجرى حصرياً على موقع <b>Chess.com</b>. أي مباراة خارج هذا الموقع لا تُعتمد في سجلات تقييم الغرفة البيضاء.</p>
+            </div>
+        </section>
+
+        <footer>
+            THE WHITE ROOM © 2026 // ALL RULES ARE ABSOLUTE
+        </footer>
+    </div>
+</body>
+</html>
